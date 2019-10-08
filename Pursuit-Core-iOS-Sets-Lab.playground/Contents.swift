@@ -8,11 +8,13 @@ import UIKit
 
 let numbers = [1,1,2,4,4,4,6,6,7,8]
 
-var numbersWithNoDuplicates = [Int]()
+var numbersWithNoDuplicates = Set<Int>(numbers).sorted()
+
+
 
 // Your code here
 
-//assert(numbersWithNoDuplicates == [1,2,4,6,7,8], "Was expecting [1,2,4,6,7,8], but got \(numbersWithNoDuplicates)")
+assert(numbersWithNoDuplicates == [1,2,4,6,7,8], "Was expecting [1,2,4,6,7,8], but got \(numbersWithNoDuplicates)")
 
 // Questions Two
 
@@ -21,8 +23,6 @@ var numbersWithNoDuplicates = [Int]()
 let scores = [1, 77, 83, 32, 77, 77, 83, 32, 99]
 
 var scoresThatAppearOnce = [Int]()
-
-// Your code here
 
 //assert(scoresThatAppearOnce == [1, 99], "Was expecting [1, 99], but got \(scoresThatAppearOnce)")
 
@@ -35,9 +35,18 @@ var scoresThatAppearOnce = [Int]()
 let arrOne = [1,2,3,4,5]
 let arrTwo = [3,4,5,6,7]
 
-var arrThree: [Int] = []
+var arrOneSet: Set<Int>// = [arrOne]
+var arrTwoSet: Set<Int> //= [arrTwo]
+
+let arrThree: [Int]
+
+var arrThreeSet: Set<Int> = []
 
 // Your code here
+//arrThreeSet = arrOneSet.union(arrTwoSet).sorted()
+
+//let union = a.union(b).sorted()
+//print(union)
 
 //assert(arrThree == [1,2,3,4,5,6,7], "Was expecting [1,2,3,4,5,6,7], but got \(arrThree)")
 
@@ -76,25 +85,36 @@ var allNumsWithNoDuplicates: [Int] = []
 
 // e.g "The quick brown fox jumps over the lazy dog" is a pangram e.g "The quick brown fox jumped over the lazy dog" is NOT a pangram
 
-let strOne = "The quick brown fox jumps over the lazy dog"
+var strOne = "The quick brown fox jumps over the lazy dog"
 let strTwo = "The quick brown fox jumped over the lazy dog"
 let strThree = "Sphinx of black quartz, judge my vow"
 
+var strThreeTrimmed = ""
+for char in strThree {
+   if char.isWhitespace || char.isPunctuation { continue }
+   strThreeTrimmed += String(char)
+}
+print(strThreeTrimmed)
+let strThreeSort = Set(strThreeTrimmed.sorted())
+
+//let String1Count = strOne.remove
 var strOneIsPangram: Bool = false
 var strTwoIsPangram: Bool = false
 var strThreeIsPangram: Bool = false
+let alphabet: [Character] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+let alphaCount = alphabet.count
+let trimmedWhitespace = strOne.components(separatedBy: " ")
+print(trimmedWhitespace)
+let trimmedString = trimmedWhitespace.joined().lowercased()
+print(trimmedString)
+let uniqueCharacters = Set(trimmedString)
+print(uniqueCharacters)
+let sortedStr = uniqueCharacters.sorted()
 
-// Your code here
+print("count is \(sortedStr.count)")
+print(sortedStr)
+strOneIsPangram = sortedStr == alphabet
 
-//assert(strOneIsPangram == true, "Was expecting true, but got \(strOneIsPangram)")
-//assert(strTwoIsPangram == false, "Was expecting false, but got \(strTwoIsPangram)")
-//assert(strThreeIsPangram == true, "Was expecting false, but got \(strThreeIsPangram)")
-
-
-
-
-
-
-
-
-
+assert(strOneIsPangram == true, "Was expecting true, but got \(strOneIsPangram)")
+assert(strTwoIsPangram == false, "Was expecting false, but got \(strTwoIsPangram)")
+assert(strThreeIsPangram == true, "Was expecting false, but got \(strThreeIsPangram)")
